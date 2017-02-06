@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <title>Blank App</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="css/theme_join.css" />
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js"></script>
+        <div class="phone-wrapper">
+        <header>
+            <nav id="nav-bar">
+                <div class="nav-wrapper">
+                    <a class="back"><img src="images/back.png" width="25px"/></a>
+                    <span class="brand-logo center">Sign Up</span>
+                    <a href="login.html" class="login" id="login_btn"><img src="images/log_on.png" width="25px"/></a>
+                </div>
+            </nav>
+        </header>
+
+
+            <div class="phone-body" id="drama_list">
+                <div class="preloader-wrapper active" style="position: fixed; top: 50%; left: 48.5%; right: 51.5%; z-index: 10000000000000; display:none;">
+                    <div class="spinner-layer spinner-black-only" style="border-color:black;">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                    </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="join">
+                    <div class="row">
+                        <form class="col s12"id="join_form" name="loginData" onsubmit="submitData();" action="http://byeongkwan.dothome.co.kr/php/idMailCheck.php" method="post">
+                            <div class="row">
+                                <div class="input-field col s8 offset-s2">
+                                    <div class="input_title">Email</div>
+                                    <input name="email" id= "input_email" type="email" class="validate" placeholder="jbk666@naver.com" >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 offset-s2">
+                                <div class="input_title">Name</div>
+                                <input name="name" id= "input_name" type="text" class="validate" placeholder="Please enter your name." maxlength=12>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 offset-s2">
+                                    <div class="input_title">ID</div>
+                                    <input name="id" id="input_id" type="text" class="validate" placeholder="Mixed English numbers 6 to 12 digits" maxlength=12>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 offset-s2">
+                                    <div class="input_title">Password</div>
+                                    <input name="pwd" id= "input_pwd" maxlength=12 type="password" class="validate" placeholder="Mixed English numbers 6 to 12 digits">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 offset-s2">
+                                    <div class="input_title">CheckPW</div>
+                                    <input name="pwd_confirm" id="input_confirm" maxlength=12 type="password" class="validate" placeholder="Please enter it again.">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 offset-s2">
+                                    <div class="input_title">Phone</div>
+                                    <input name="phone" id= "input_phone" maxlength=40 type="text" class="validate" placeholder="Please enter your phone number (except '-')">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s8 offset-s2">
+                                    <div class="input_title">Address</div>
+                                    <input name="addr" id= "input_addr" maxlength=40 type="text" class="validate" placeholder="Please enter your address.">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row" style="margin-bottom: 4px">
+                            <div class="button col s8 offset-s2">
+                                    <a class="waves-effect waves-light btn-large" id="button_join">Sign Up</a>
+                            </div>
+                    </div>
+            </div>
+        </div>
+            <script src="js/JoinCheck.js"></script>
+
+        </div>
+    </body>
+</html>

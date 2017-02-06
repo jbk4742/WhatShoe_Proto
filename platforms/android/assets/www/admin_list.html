@@ -1,0 +1,77 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<?php
+        include("php/dbConnect.php");
+        $id= $_POST['admin_id'];
+        $product= $_POST['admin_pro'];
+        $index = $_POST['admin_index'];
+        $i = 9;
+        $sql="select _order_date, _id, _name, _product, _deliver_addr, _phone, _content, _pay_method, _order_state from Shopping WHERE _index='$index';";
+        $result=mysqli_query($link,$sql);
+        $row = array();
+        ?>
+        <form action="php/admin_clientInfo.php", id="clientInfo_form" method="post">
+                <input type="text" name="clientInfo_id" style="display: none" id="clientInfo_id">
+        </form>
+<?
+
+
+        echo "<h3>Order customer Info</h3><br>";
+        echo("<style>
+                    table{
+                        width: 100%;
+                    }
+                    th, td {
+                        border: 1px solid #bcbcbc;
+                        text-align: center;
+                    }
+                    table#table1{
+                            height: 500px;
+                    }
+                    td#admin_id:hover{
+                            background-color: yellow;
+                            cursor: pointer;
+                    }
+        </style>");
+        $data = array('Date', 'ID','Name', 'Product', 'Addr', 'Phone', 'To Driver', 'Payment', 'Order State');
+        ?>
+        <table id="table1"> <tr><th>list</th><th>data</th></tr>
+        <?php
+        while($row=mysqli_fetch_array($result)){
+                ?>
+                <tr><td><? echo $data[0] ?></td><td><? echo $row[_order_date] ?></td></tr>
+                <tr><td><? echo $data[1] ?></td><td id="admin_id"><? echo $row[_id] ?></td></tr>
+                <tr><td><? echo $data[2] ?></td><td><? echo $row[_name] ?></td></tr>
+                <tr><td><? echo $data[3] ?></td><td><? echo $row[_product] ?></td></tr>
+                <tr><td><? echo $data[4] ?></td><td><? echo $row[_deliver_addr] ?></td></tr>
+                <tr><td><? echo $data[5] ?></td><td><? echo $row[_phone] ?></td></tr>
+                <tr><td><? echo $data[6] ?></td><td><? echo $row[_content] ?></td></tr>
+                <tr><td><? echo $data[7] ?></td><td><? echo $row[_pay_method] ?></td></tr>
+                <tr><td><? echo $data[8] ?></td><td><? echo $row[_order_state] ?></td></tr>
+                <?
+        }
+        echo("</table");
+
+        $sql_shop = "select _id, _name, _product, _order_state, _order_date from Shopping where _id = '$id';";
+        $sql_result = mysqli_query($link, $sql_shop);
+        $row_shop = array();
+
+        echo("<br><br>");
+        echo("<table> <br><br><tr><th>ID</th><th>Buyer</th><th>Product</th><th>Order State</th><th>Order Date</th></tr>");
+        while($row_shop = mysqli_fetch_array($sql_result)){
+                echo("<tr><td>$row_shop[_id]</td><td>$row_shop[_name]</td><td>$row_shop[_product]</td><td>$row_shop[_order_state]</td><td>$row_shop[_order_date]</td></tr>
+                ");
+        }
+
+        echo("</table>");
+?>
+
+                <script type="text/javascript">
+                        $('#admin_id').click(function () {
+                            window.localStorage._id = "<?php echo $id?>";
+                            document.getElementById('clientInfo_id').value = window.localStorage._id;
+                            document.getElementById('clientInfo_form').submit();
+                        });
+                </script>

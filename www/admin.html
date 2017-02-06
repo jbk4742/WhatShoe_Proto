@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        table{
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #bcbcbc;
+            text-align: center;
+        }
+        tr:hover {
+            background-color: yellow;
+            color: #252525;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h4>Order customer list</h4>
+<table>
+    <thead>
+    <tr><th>Order Number</th><th>ID</th><th>Product</th><th>Order date</th></tr>
+    </thead>
+<?php
+    include("php/adminDB.php");
+    for($j = 0 ; $j< $i; $j++){
+?>
+
+    <tr id=_index<?php echo $j?> style="cursor: pointer;"><td><?php echo $index[$j]?></td><td><?php echo $id[$j] ?></td><td><?php echo $product[$j] ?></td><td><?php echo $date[$j] ?></td></tr>
+
+
+<?php
+    }
+?>
+</table>
+<h6>Click to go to that information.</h6>
+<form id="admin_index_form" action="admin_list.html" method="post">
+        <input type="text" name="admin_id" style="display: none" id="admin_id">
+        <input type="text" name="admin_pro" style="display: none" id="admin_pro">
+        <input type="text" name="admin_index" style="display: none" id="admin_index">
+</form>
+<form id="admin_id_form" action="php/admin_clientInfo.php" method="post">
+    <input type="text" name="adminInfo_id" style="display: none" id="adminInfo_id">
+</form>
+<script type="text/javascript">
+    <?php
+        for($j=0 ; $j< $i; $j++){
+        ?>
+            $('#_index<?php echo $j?>').click(function () {
+                window.localStorage.index<?php echo $j?> = "<?php echo $index[$j]?>";
+                window.localStorage.id<?php echo $j?> = "<?php echo $id[$j]?>";
+                window.localStorage.product<?php echo $j?> = "<?php echo $product[$j]?>";
+                document.getElementById('admin_index').value = window.localStorage.index<?php echo $j?>;
+                document.getElementById('admin_id').value = window.localStorage.id<?php echo $j?>;
+                document.getElementById('admin_pro').value = window.localStorage.product<?php echo $j?>;
+                document.getElementById('admin_index_form').submit();
+            });
+
+    <?php
+        }
+                ?>
+
+</script>
+</body>
+</html>

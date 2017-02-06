@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue-red.min.css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+</head>
+
+<title>cordova-plugin-fcm tester</title>
+<body>
+
+<!-- MATERIAL FIXER -->
+<style>
+.mdl-layout__header {
+    display: block;
+}
+.mdl-layout__drawer-button .material-icons{
+	display: table-cell;
+    vertical-align: middle;
+}
+.mdl-layout__drawer-button {
+	display:table;
+	color:white;
+}
+#donateContainer {
+    text-align: right;
+    margin-top: 20px;
+}
+</style>
+
+<style>
+.maxWidth{
+	width:100%;
+}
+.w50{
+	width:50%;
+	float:left;
+}
+.labelSeparator{
+	color:rgb(33,150,243);
+	font-size: 12px;
+}
+#dataArrayContainer{
+	float: right;
+    width: 90%;
+}
+.template{
+	display:none;
+}
+</style>
+
+<body>
+<div class="mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+        <div class="maxWidth mdl-card mdl-shadow--2dp">
+            <div class="mdl-card__title mdl-card--border">
+                <div class="mdl-card__title-text">cordova-plugin-fcm tester</div>
+            </div>
+            <div class="mdl-card__supporting-text mdl-card--border">
+                <div class="maxWidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="application">
+                    <label class="mdl-textfield__label" for="sample1">Application [com.test.app] or blank for all</label>
+                </div>
+                <div class="maxWidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="apiKey">
+                    <label class="mdl-textfield__label" for="sample1">API Key* [AIzaSyC****************]</label>
+                </div>
+                <div class="maxWidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="title">
+                    <label class="mdl-textfield__label" for="sample1">Title*</label>
+                </div>
+                <div class="maxWidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" type="text" rows= "1" id="body"></textarea>
+                    <label class="mdl-textfield__label" for="sample5">Message*</label>
+                </div>
+                <div class="labelSeparator">
+                    Custom data parameters
+                </div>
+                <div id="dataArrayContainer">
+                    <div id="customDataPair" class="template">
+                        <div class="w50 mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="sample1" onchange="refreshCustomData()">
+                            <label class="mdl-textfield__label" for="sample1">NAME</label>
+                        </div>
+                        <div class="w50 mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="sample2" onchange="refreshCustomData()">
+                            <label class="mdl-textfield__label" for="sample2">VALUE</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="maxWidth mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="recipient">
+                    <label class="mdl-textfield__label" for="sample1">Recipient*</label>
+                </div>
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="isTopic">
+                    <input type="checkbox" id="isTopic" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Recipient is a topic</span>
+                </label>
+            </div>
+            <div class="mdl-card__supporting-text mdl-card--border">
+                <div>
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="saveData">
+                        <input type="checkbox" id="saveData" class="mdl-switch__input" onchange="refreshSavedData()">
+                        <span class="mdl-switch__label">Save data for future sending</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+                <div class="mdl-layout-spacer"></div>
+                <div>
+                    <button id="sendButton" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" onclick="sendPush()">
+                        <span id="sendButtonText">Send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="donateContainer">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="VF654BMGUPQTJ">
+                <input type="image" src="https://www.paypalobjects.com/en_US/ES/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal. La forma rÃ¡pida y segura de pagar en Internet.">
+                <img alt="" border="0" src="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif" width="1" height="1">
+            </form>
+        </div>
+    </div>
+    <div class="mdl-layout-spacer"></div>
+</div>
+
+
+</body>
+
+<script>
+
+function saveData(){
+	localStorage.setItem("recipient", document.getElementById('recipient').value)
+	localStorage.setItem("isTopic", document.getElementById('isTopic').checked)
+	localStorage.setItem("title", document.getElementById('title').value)
+	localStorage.setItem("body", document.getElementById('body').value)
+	localStorage.setItem("apiKey", document.getElementById('apiKey').value)
+	localStorage.setItem("application", document.getElementById('application').value)
+	localStorage.setItem("customData", JSON.stringify(customData))
+	localStorage.setItem("saveData", true)
+}
+function loadData(){
+	document.getElementById('recipient').value = localStorage.getItem("recipient")
+	document.getElementById('isTopic').checked = localStorage.getItem("isTopic")=='true'?true:false;
+	document.getElementById('title').value = localStorage.getItem("title")
+	document.getElementById('body').value = localStorage.getItem("body")
+	document.getElementById('apiKey').value = localStorage.getItem("apiKey")
+	document.getElementById('application').value = localStorage.getItem("application")
+	customData = JSON.parse( localStorage.getItem("customData") )
+}
+function delData(){
+	localStorage.removeItem("recipient");
+	localStorage.removeItem("isTopic");
+	localStorage.removeItem("title");
+	localStorage.removeItem("body");
+	localStorage.removeItem("apiKey");
+	localStorage.removeItem("application");
+	localStorage.removeItem("customData");
+	localStorage.setItem("saveData", false)
+}
+function refreshSavedData(){
+	if( document.getElementById('saveData').checked ) saveData();
+	else delData()
+}
+</script>
+
+<script>
+loadData()
+document.getElementById('application').value = 'com.phonegap.helloworld';
+document.getElementById('apiKey').value = 'AAAAZl6ej20:APA91bFPUz3f0jYHDrHZf9sE5eRVyBeKexzmdUMPIq6tIG3V3-bqc7QttwiKVwNManmBfuMR9UMaIu8BeIUQujn7iKhvkFA9S7cGAlcVMHXH-omZs-Yfl20nYhEm4zWOeZ9KyzZNeTia';
+if(!document.getElementById('recipient').value) document.getElementById('recipient').value = 'all'
+if(!document.getElementById('title').value) document.getElementById('title').value = 'Title'
+if(!document.getElementById('body').value) document.getElementById('body').value = 'Body'
+if(!localStorage.getItem("isTopic")) document.getElementById('isTopic').checked = true
+if(localStorage.getItem("saveData") == "true") document.getElementById('saveData').checked = true
+</script>
+
+<script>
+if(!customData)customData = [{param:'',value:''}]
+customDataTemplate = null;
+function refreshCustomData(){
+	for(i=0 ; i<document.getElementsByClassName('customDataPair').length ; i++){
+		var element = document.getElementsByClassName('customDataPair')[i]
+		var inputName = element.getElementsByTagName('input')[0].value
+		var inputValue = element.getElementsByTagName('input')[1].value
+		customData[i].param = inputName
+		customData[i].value = inputValue
+	}
+	for(i=0 ; i<customData.length ; i++){
+		var data = customData[i]
+		if(data.param=='' && data.value=='' && i<customData.length-1) customData.splice(i, 1);
+		if((data.param!='' || data.value!='') && i==customData.length-1) customData.push({param:'',value:''})
+	}
+	if(!customDataTemplate)customDataTemplate = document.getElementById("customDataPair")
+	var cln = customDataTemplate.cloneNode(true);
+	document.getElementById('dataArrayContainer').innerHTML = '';
+	for(i=0 ; i<customData.length ; i++){
+		var newcln = customDataTemplate.cloneNode(true);
+		newcln.id = 'customDataPair-'+i
+		newcln.className = 'customDataPair';
+		newcln.getElementsByTagName('input')[0].value = customData[i].param;
+		newcln.getElementsByTagName('input')[0].id = 'cDataName-'+i
+		newcln.getElementsByTagName('label')[0].setAttribute('for', 'cDataName-'+i)
+		newcln.getElementsByTagName('input')[1].value = customData[i].value;
+		newcln.getElementsByTagName('input')[1].id = 'cDataValue-'+i
+		newcln.getElementsByTagName('label')[1].setAttribute('for', 'cDataValue-'+i)
+		document.getElementById('dataArrayContainer').appendChild( newcln )
+	}
+	componentHandler.upgradeDom();
+}
+refreshCustomData()
+</script>
+
+<script>
+endpoint = "https://cordova-plugin-fcm.appspot.com"
+function sendPush(){
+
+	document.getElementById('sendButton').disabled = 'true'
+	document.getElementById('sendButtonText').innerHTML = 'Sending...'
+	if( document.getElementById('saveData').checked ) saveData();
+	else delData();
+	var customDataFixed = customData.slice(0, customData.length-1)
+
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	  if(xhttp.readyState == 4){
+		document.getElementById('sendButton').removeAttribute('disabled')
+		document.getElementById('sendButtonText').innerHTML = 'Send'
+		if(xhttp.status == 200){
+			var response = JSON.parse(xhttp.responseText);
+			console.log( response );
+			if(response.result == 1) alert( 'ERROR: ' + response.message )
+			else alert( 'Push notification sent successfully!' )
+		}
+	  }
+	};
+	xhttp.open("POST", endpoint+'/push/freesend', true);
+	xhttp.setRequestHeader("Content-type", "application/json");
+	xhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+	var payload={
+		recipient:document.getElementById('recipient').value,
+		isTopic:document.getElementById('isTopic').checked,
+		title:document.getElementById('title').value,
+		body:document.getElementById('body').value,
+		apiKey:document.getElementById('apiKey').value,
+		application:document.getElementById('application').value,
+		customData:customDataFixed
+	}
+	xhttp.send(JSON.stringify(payload));
+}
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63512776-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</html>

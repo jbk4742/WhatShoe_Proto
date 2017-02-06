@@ -1,0 +1,55 @@
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<?php
+        include("php/dbConnect.php");
+        $id= $_POST['order_id'];
+        $name= $_POST['order_name'];
+        $product= $_POST['order_product'];
+        $addr= $_POST['order_addr'];
+        $phone= $_POST['order_phone'];
+        $payMethod= $_POST['order_payMethod'];
+        $content= $_POST['order_content'];
+        $date= $_POST['order_date'];
+
+        echo("<style>
+                h4,h5{
+                border: 1px solid #bcbcbc;
+                text-align: center;
+                padding : 10px;
+                }
+                #orderDB_page:hover{
+                background-color: yellow;
+                cursor: pointer;
+                }
+        </style>");
+
+        $i=0;
+        $index_sql = "select _index from Shopping;";
+        $result=mysqli_query($link,$index_sql);
+
+        while($index_result = mysqli_fetch_array($result)){
+            $i+=1;
+        }
+
+           $sql = "INSERT INTO Shopping(_index, _id, _name, _product, _deliver_addr, _phone, _content, _pay_method, _order_state, _order_date) VALUES ('$i', '$id', '$name', '$product', '$addr', '$phone', '$content', '$payMethod', '주문완료', '$date');";
+           if(mysqli_query($link,$sql)){
+                echo("<h4>성공적으로 주문이 되었습니다.</h4>");
+?>
+                <center>
+                <img src="images/main_logo.png">
+                </center>
+                <br><br><br><br><h5 id="orderDB_page">왓슈페이지로 돌아가기</h5>
+<?
+           } else{
+                echo "실패";
+           }
+
+?>
+
+<script type="text/javascript">
+    $('#orderDB_page').click(function () {
+        location.href="http://www.whatshoe.co.kr/";
+    })
+</script>

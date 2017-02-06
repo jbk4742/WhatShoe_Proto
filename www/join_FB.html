@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>추가정보입력</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/theme_join.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="cordova.js"></script>
+<div class="phone-wrapper">
+    <header>
+        <nav id="nav-bar">
+            <div class="nav-wrapper">
+                <a class="back" href="login.html"><img src="images/back.png" width="25px"/></a>
+                <span class="brand-logo center">Enter additional information</span>
+                <a href="index.html" class="login" id="login_btn"><img src="images/log_on.png" width="25px"/></a>
+            </div>
+        </nav>
+    </header>
+    <div class="phone-body" id="drama_list">
+        <div class="preloader-wrapper active" style="position: fixed; top: 50%; left: 48.5%; right: 51.5%; z-index: 10000000000000; display:none;">
+            <div class="spinner-layer spinner-black-only" style="border-color:black;">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+        </div>
+    <div class="join">
+        <div class="row">
+            <form class="col s12"id="join_form_FB" name="loginData" onsubmit="submitData();" action="http://byeongkwan.dothome.co.kr/php/dbFBLogin.php" method="post">
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">ID</div>
+                        <input name="id" id= "input_id" type="text" class="validate" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Name</div>
+                        <input name="name" id= "input_name" type="text" class="validate" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Email</div>
+                        <input name="email" id= "input_email" type="email" class="validate" placeholder="jbk666@naver.com" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Phone</div>
+                        <input name="phone" id= "input_phone" maxlength=40 type="text" class="validate" placeholder="Please enter your phone number (except '-')">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Address</div>
+                        <input name="addr" id= "input_addr" maxlength=40 type="text" class="validate" placeholder="Please enter your address.">
+                    </div>
+                </div>
+                <div>
+                    <span id="FB_id" name="id"></span>
+                    <span id="FB_name" name="name"></span>
+                </div>
+            </form>
+        </div>
+        <div class="row" style="margin-bottom: 4px">
+            <div class="button col s8 offset-s2">
+                <a class="waves-effect waves-light btn-large" id="button_join_FB">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/FBJoinCheck.js"></script>
+
+    <script type="text/javascript">
+
+    </script>
+
+</div>
+</body>
+</html>

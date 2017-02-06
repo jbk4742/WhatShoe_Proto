@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>로그인</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/theme_login.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+    <script src="/js/asdf.js"></script>
+</head>
+<body>
+<script type="text/javascript" src="cordova.js"></script>
+<div class="phone-wrapper">
+    <div class="phone-body">
+        <div class="login">
+            <div class="row" style="margin-bottom: 0px">
+                <div id="logo">
+                    <a tabindex="-1" title="LOGIN">LOGIN</a>
+                </div>
+            </div>
+            <div class="row">
+                <h4> WhatShoe </h4>
+            </div>
+
+            <div class="row">
+                <form class="col s12" id="login_form" action="http://byeongkwan.dothome.co.kr/php/IdPwCheck.php" method="post">
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <div class="input_title">ID</div>
+                            <input name="login_id" id="login_id" type="text" class="validate" placeholder="Mixed English numbers 6 to 12 digits">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <div class="input_title">PWD</div>
+                            <input name="login_pw" id="login_pw" maxlength=12 type="password" class="validate" placeholder="Mixed English numbers 6 to 12 digits">
+                        </div>
+                    </div>
+                </form>
+            <div class="row" style="margin-bottom: 4px">
+                <div class="butoon col s8 offset-s2">
+                    <a class="waves-effect waves-light btn-large" id="button_login" >LOGIN</a>
+                </div>
+                <div class="butoon col s8 offset-s2">
+                    <a href="index.html" class="waves-effect waves-light btn-large" id="button_signup" >SIGN UP</a>
+                </div>
+                <div class="butoon col s8 offset-s2">
+                    <a class="waves-effect waves-light btn-large" id='button_signup_facebook' >FACEBOOK</a>
+                </div>
+                <div class="butoon col s8 offset-s2">
+                    <a class="waves-effect waves-light btn-large" id='button_signup_kakao'>KAKAO TALK</a>
+                </div>
+            </div>
+                    <div id="kakao-logged-group"></div>
+                    <div id="kakao_id"></div>
+                    <div id="kakao_name"></div>
+
+                    <div id="status"></div>
+                    <div id="fb_id"></div>
+                    <div id="fb_name"></div>
+
+                <script src="js/facebookLogin.js"></script>
+                <script src="js/loginCheck.js"></script>
+                <script src="js/kakaoLogin.js"></script>
+        </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

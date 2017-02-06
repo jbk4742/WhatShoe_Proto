@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/theme_order.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+</head>
+<body>
+<script type="text/javascript" src="cordova.js"></script>
+<div class="phone-wrapper">
+    <div class="phone-body">
+        <div class="login">
+        <div class="row">
+            <h4> Order </h4>
+        </div>
+        <div class="row">
+            <form class="col s12" id="order_form" action="http://byeongkwan.dothome.co.kr/orderDB.html" method="post">
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">ID</div>
+                        <input name="order_id" id="order_id" type="text" class="validate" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Name</div>
+                        <input name="order_name" id="order_name" type="text" class="validate" placeholder="Please enter your Name.">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Product</div>
+                        <input name="order_product" id="order_product" type="text" class="validate" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Address</div>
+                        <input name="order_addr" id="order_addr" type="text" class="validate" placeholder="Please enter your address.">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Phone</div>
+                        <input name="order_phone" id="order_phone" type="text" class="validate" placeholder="Please enter your phone number (except '-')">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">Pay Method</div>
+                        <input class="input_btn" id="method_btn" type="button" class="validate", value="Select" style="margin-left: 557px;">
+                        <input name="order_payMethod" id="order_payMethod" type="text" class="validate" style="display: inline-block">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <div class="input_title">To Driver</div>
+                        <input name="order_content" id="order_content" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2">
+                        <input name="order_date" id="order_date" type="text"  style="display: none;" class="validate">
+                    </div>
+                </div>
+            </form>
+            <div class="row" style="margin-bottom: 4px">
+                <div class="butoon col s8 offset-s2">
+                    <a class="waves-effect waves-light btn-large" id="order_btn" >Order</a>
+                </div>
+            </div>
+            <div id="dialog" title="Payment">
+                <p class="validateTips">Choose a payment method</p>
+                <form>
+                    <fieldset>
+                        <label for="a">Naver Pay</label>
+                        <input type="radio" name="paymethod" id="a"  value="Naver Pay" class="text ui-widget-content ui-corner-all">
+                        <label for="b">Kakao Pay</label>
+                        <input type="radio" name="paymethod" id="b"  value="Kakao Pay" class="text ui-widget-content ui-corner-all" >
+                        <label for="c">Bank Transfer</label>
+                        <input type="radio" name="paymethod" id="c"  value="Bank Transfer" class="text ui-widget-content ui-corner-all">
+                        <label for="d">Credit card</label>
+                        <input type="radio" name="paymethod" id="d"  value="Credit card" class="text ui-widget-content ui-corner-all">
+                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+<script src="js/orderCheck.js"></script>
+</body>
+</html>
